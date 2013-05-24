@@ -7,8 +7,8 @@ function get($scope, $http, url, name) {
 }
 
 function repoCtrl($scope, $http) {
-	// get($scope, $http, 'https://api.github.com/users/qbit/repos?sort=updated', 'repos');
-	get($scope, $http, 'components/bolddaemon/repos.json', 'repos');
+	get($scope, $http, 'https://api.github.com/users/qbit/repos?sort=updated', 'repos');
+	// get($scope, $http, 'components/bolddaemon/repos.json', 'repos');
 }
 
 function dataCtrl($scope, $http) {
@@ -17,10 +17,12 @@ function dataCtrl($scope, $http) {
 
 	$scope.setSearch = function(cat) {
 		console.log( cat );
-		$scope.search = cat;
+		$scope.search = cat.name;
 	};
 }
 
 function cwCtrl($scope, $http) {
-	get($scope, $http, 'components/bolddaemon/coderwall.json', 'badges');
+	$http.jsonp( 'https://coderwall.com/qbit.json?callback=JSON_CALLBACK' ).success( function( d, s ) {
+		$scope.badges = d.data.badges;
+	});
 }
