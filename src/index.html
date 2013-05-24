@@ -12,7 +12,8 @@
 		<div class="row-fluid">
 			<div class="span2">
 				<div>
-					<input class="pull-right" placeholder="search.." ng-model="search">
+					<img width="160px" src="components/bolddaemon/puffer.png"><br>
+					<input width="20" placeholder="search.." ng-model="search">
 				</div>
 				<div id="repos" ng-controller="repoCtrl">
 					<h3>Recent Projects</h3>
@@ -32,15 +33,15 @@
 				</div>
 			</div>
 			<div class="span8" id="posts">
-				<div ng-repeat="post in posts | filter:search | limitTo:5">
+				<div class="post" ng-repeat="post in posts | filter:search | limitTo:5">
 					<h3>{{post.title}}</h3>
-					<i>{{post.date}}</i>
+					<i>{{post.author}} - {{post.date}}</i>
 					<hr>
 					<p ng-bind-html-unsafe="post.body">{{post.body}}</p>
 				</div>
-        <div class="span10" ng-controller="cwCtrl">
-          <img ng-repeat="badge in badges" class="badge" ng-src={{badge.badge}} alt={{badge.description}}>
-        </div>
+				<div class="span10" ng-controller="cwCtrl">
+					<img ng-repeat="badge in badges" class="badge" ng-src={{badge.badge}} alt={{badge.description}}>
+				</div>
 			</div>
 		</div>
 	</div>

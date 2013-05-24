@@ -1,5 +1,3 @@
-// Controlers
-
 function get($scope, $http, url, name) {
 	$http.get( url ).success( function( d, s ) {
 		$scope[name] = d;
@@ -25,3 +23,4 @@ function cwCtrl($scope, $http) {
 		$scope.badges = d.data.badges;
 	});
 }
+
