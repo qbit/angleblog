@@ -1,0 +1,54 @@
+<html ng-app>
+<head>
+	<title>Bold Daemon</title>
+	<script src="components/angular/angular.min.js"></script>
+	<script src="components/bolddaemon/bolddaemon.js"></script>
+	<link href="components/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container-fluid" ng-controller="dataCtrl">
+		<div class="row-fluid">
+			<div class="span2">
+				<div>
+					<input class="pull-right" placeholder="search.." ng-model="search.$">
+				</div>
+				<div id="repos" ng-controller="repoCtrl">
+					<h3>Repositories</h3>
+					<ul>
+						<li ng-repeat="repo in repos | filter:search">
+						<a href="{{repo.html_url}}" title="{{repo.description}}">{{repo.name}}</a>
+						</li>
+					</ul>
+				</div>
+				<div id="categories">
+					<h3>Categories</h3>
+					<ul>
+						<li ng-repeat="category in categories">
+							<a href="#" ng-click="setSearch(category)">{{category.name}}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="span10" id="posts">
+				<div ng-repeat="post in posts | filter:search">
+					<h3>{{post.title}}</h3>
+					<i>{{post.date}}</i>
+					<hr>
+					<p ng-bind-html-unsafe="post.body">{{post.body}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid" ng-controller="cwCtrl">
+			<div class="span10">
+				<ul>
+					<li ng-repeat="badge in badges">
+						<img ng-src={{badge.badge}}
+						alt={{badge.name + ' - ' + badge.description}}>
+					</li>
+				</ui>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

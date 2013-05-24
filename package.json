@@ -1,0 +1,17 @@
+{
+  "name": "bolddaemon",
+  "version": "0.0.1",
+  "description": "BoldDaemon.com blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Aaron Bieber <deftly@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-rsync": "~0.1.1",
+    "grunt-contrib-jshint": "~0.5.4"
+  }
+}
