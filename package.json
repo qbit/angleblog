@@ -9,9 +9,12 @@
   "repository": "",
   "author": "Aaron Bieber <deftly@gmail.com>",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-rsync": "~0.1.1",
-    "grunt-contrib-jshint": "~0.5.4"
+    "grunt-contrib-jshint": "~0.5.4",
+    "grunt-devtools": "~0.1.0-7",
+    "grunt-contrib-watch": "~0.4.3"
   }
 }
