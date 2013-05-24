@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="span8" id="posts">
-				<div ng-repeat="post in posts | filter:search">
+				<div ng-repeat="post in posts | filter:search | limitTo:5">
 					<h3>{{post.title}}</h3>
 					<i>{{post.date}}</i>
 					<hr>
