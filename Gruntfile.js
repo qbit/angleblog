@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 			"test": {
 				src: "./src/",
 				dest: "aaron@akb.io:/var/www/bolddaemon/test/",
+				syncDest: true,
 				recursive: true
 			}
 		}
