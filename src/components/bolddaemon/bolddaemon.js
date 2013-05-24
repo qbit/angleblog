@@ -16,7 +16,6 @@ function dataCtrl($scope, $http) {
 	get($scope, $http, 'components/bolddaemon/posts.json', 'posts');
 
 	$scope.setSearch = function(cat) {
-		console.log( cat );
 		$scope.search = cat.name;
 	};
 }
