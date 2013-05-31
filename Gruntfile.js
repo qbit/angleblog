@@ -1,14 +1,5 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
-		watch: {
-			scripts: {
-				files: ['./src'],
-				tasks: ['jshint','livereload'],
-				options: {
-					nospawn: true,
-				}
-			},
-		},
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
 			all: ['Gruntfile.js', 'src/components/<%= pkg.name %>/*.js', 'tests/<%= pkg.name %>/*.js']
@@ -17,6 +8,12 @@ module.exports = function(grunt) {
 			"test": {
 				src: "./src/",
 				dest: "aaron@akb.io:/var/www/bolddaemon/test/",
+				syncDest: true,
+				recursive: true
+			},
+			"live": {
+				src: "./src/",
+				dest: "aaron@akb.io:/var/www/bolddaemon/",
 				syncDest: true,
 				recursive: true
 			}
