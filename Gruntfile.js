@@ -21,7 +21,5 @@ module.exports = function(grunt) {
 	});
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-rsync');
-	grunt.loadNpmTasks('grunt-devtools');
-	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.registerTask('default', ['jshint', 'rsync']);
 };
