@@ -1,7 +1,7 @@
 <html ng-app>
 <head>
 	<title>Bold Daemon</title>
-	<link href="components/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="components/bootstrap/css/bootstrap.css" rel="stylesheet">
 	<script src="components/angular/angular.min.js"></script>
 	<script>
 		function get($scope, $http, url, name) {
@@ -43,7 +43,7 @@
 			border: 1px solid #000;
 		}
 
-		.badge {
+		.cwbadge {
 		  width: 30px;
 		  height: 30px;
 		}
@@ -54,12 +54,12 @@
 			margin: 0;
 		}
 
-		li {
+		ul li {
 			padding-left: 1em;
 			text-indent: -.7em;
 		}
 
-		li:before {
+		ul li:before {
 			content: "› "
 		}
 	</style>
@@ -67,7 +67,7 @@
 <body>
 	<div class="container-fluid" ng-controller="dataCtrl">
 		<div class="row-fluid">
-			<div class="span2">
+			<div class="span3">
 				<div>
 					<img src="components/bolddaemon/puffer-small.png"><br>
 					<input width="20" placeholder="search.." ng-model="search">
@@ -88,16 +88,17 @@
 						</li>
 					</ul>
 				</div>
+				<div ng-controller="cwCtrl">
+					<h3>CoderWall</h3>
+					<img ng-repeat="badge in badges" class="cwbadge" ng-src={{badge.badge}} alt={{badge.description}}>
+				</div>
 			</div>
-			<div class="span8" id="posts">
+			<div class="span9" id="posts">
 				<div class="post" ng-repeat="post in posts | filter:search | limitTo:5">
+					<hr>
 					<h3>{{post.title}}</h3>
 					<i>{{post.author}} - {{post.date}}</i>
-					<hr>
 					<p ng-bind-html-unsafe="post.body">{{post.body}}</p>
-				</div>
-				<div class="span10" ng-controller="cwCtrl">
-					<img ng-repeat="badge in badges" class="badge" ng-src={{badge.badge}} alt={{badge.description}}>
 				</div>
 			</div>
 		</div>
