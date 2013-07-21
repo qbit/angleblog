@@ -8,10 +8,10 @@ port = process.env.PORT || 9876,
 app,
 
 o = {}, 
-date = new Date(),
-posts = path.join(__dirname, '../src/components/bolddaemon/posts.json');
+posts = {},
+posts_file = path.join(__dirname, '../src/components/bolddaemon/posts.json');
 
-fs.readFile(posts, function(e,d) {
+fs.readFile(posts_file, function(e,d) {
 
 	if (e) {
 		throw e;
@@ -19,10 +19,6 @@ fs.readFile(posts, function(e,d) {
 
 	posts = JSON.parse(d);
 });
-
-o.title = '';
-o.body = '';
-o.date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
 
 console.log('Listening on %d for editing! %s', port, 'http://localhost:' + port);
 
@@ -38,10 +34,30 @@ app = connect()
 			});
 		}
 		if (req.url === '/edit') {
+			res.end();
+		}
+		if (req.url.match('/post/')) {
+			var idx = req.url.replace(/\/post\/(\d+)/, '$1');
+			console.log('editing %s', idx);
+			fs.readFile('editor/edit.ejs', 'utf8', function(e, d) {
+				d = ejs.render(d, {post: posts[idx], id: idx});
+				res.end(d);
+			});
 		}
 		if (req.url === '/save') {
-			console.log(req.body);
-			res.end();
+			req.body.author = 'Aaron Bieber';
+			if (req.body.id) {
+				posts[req.body.id].title = req.body.title;
+				posts[req.body.id].body = req.body.body;
+			} else {
+				var date = new Date();
+				req.body.date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+				posts.unshift(req.body);
+			}
+
+			fs.writeFile( posts_file, JSON.stringify(posts), function() {
+				res.end();
+			});
 		}
 	});
 

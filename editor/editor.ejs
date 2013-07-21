@@ -1,12 +1,15 @@
 <ol>
 	<% for ( var i = 0, l = posts.length; i < l; i++ ) { %>
-		<li id="post<%- i %>"><%- posts[i].title %></li>
+	<li>
+	<a href="/post/<%- i %>">edit</a>
+	<%- posts[i].title %>
+	</li>
 	<% } %>
 </ol>
 <div>
 	<form name="post" action="/save" method="POST">
 		Title: <input name="title" type="text" /><br>
-		Body: <textarea name="body"></textarea>
+		Body: <textarea width="300px" height="400px" name="body"></textarea>
 		<input type="submit" value="Save"/>
 	</form>
 </div>

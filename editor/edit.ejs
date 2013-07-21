@@ -1,0 +1,8 @@
+<div>
+	<form name="post" action="/save" method="POST">
+		Title: <input name="title" type="text" value="<%- post.title %>"/><br>
+		Body: <textarea width="300px" height="400px" name="body"><%- post.body %></textarea>
+		<input name="id" type="hidden" value="<%- id %>">
+		<input type="submit" value="Save"/>
+	</form>
+</div>
