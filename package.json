@@ -9,7 +9,10 @@
   "repository": "",
   "author": "Aaron Bieber <deftly@gmail.com>",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "connect": "~2.8.4",
+    "ejs": "~0.8.4"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-rsync": "~0.1.1",
