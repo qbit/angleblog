@@ -1,0 +1,5 @@
+#!/bin/ksh
+
+ftp -o src/cache/gists.json "https://api.github.com/users/qbit/gists"
+ftp -o src/cache/repos.json "https://api.github.com/users/qbit/repos?sort=updated"
+ftp -o src/cache/posts.json "https://www.googleapis.com/plus/v1/people/108155057102084949527/activities/public?key=AIzaSyCb1HIajl9nArJU4EnLmfFqt2jIcK-K19E"
