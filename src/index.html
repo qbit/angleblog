@@ -14,6 +14,9 @@
 			get($scope, $http, 'https://api.github.com/users/qbit/repos?sort=updated', 'repos');
 			// get($scope, $http, 'components/bolddaemon/repos.json', 'repos');
 		}
+		function gistCtrl($scope, $http) {
+			get($scope, $http, 'https://api.github.com/users/qbit/gists', 'gists');
+		}
 
 		function dataCtrl($scope, $http) {
 			get($scope, $http, 'components/bolddaemon/categories.json', 'categories');
@@ -77,6 +80,14 @@
 					<ul>
 						<li ng-repeat="repo in repos | filter:search | limitTo:10">
 						<a href="{{repo.html_url}}" title="{{repo.description}}">{{repo.name}}</a>
+						</li>
+					</ul>
+				</div>
+				<div id="gists" ng-controller="gistCtrl">
+					<h3>Recent GISTS</h3>
+					<ul>
+						<li ng-repeat="gist in gists | filter:search | limitTo:5">
+						<a href="{{gist.html_url}}" title="{{gist.description}}">{{gist.description}}</a>
 						</li>
 					</ul>
 				</div>
