@@ -2,25 +2,40 @@
 <head>
 	<title>Bold Daemon</title>
 	<link href="components/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<script src="components/angular/angular.min.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
 	<script>
 		function get($scope, $http, url, name) {
-			$http.get( url ).success( function( d, s ) {
-				$scope[name] = d;
-			});
+			if (name === 'posts') {
+				$scope[name] = $http.jsonp( url ).success(function(d,s) {
+					if ( d.error ) {
+						$http.get( 'cache/posts.json' ).success( function( d, s ) {
+							$scope[name] = d;
+						});
+					} else {
+						$scope[name] = d;
+					}
+				});
+			} else  {
+				$http.get( url ).success( function( d, s ) {
+						// check for failure and load cached data here.
+					$scope[name] = d;
+				});
+			}
 		}
 
 		function repoCtrl($scope, $http) {
 			get($scope, $http, 'https://api.github.com/users/qbit/repos?sort=updated', 'repos');
-			// get($scope, $http, 'components/bolddaemon/repos.json', 'repos');
 		}
 		function gistCtrl($scope, $http) {
 			get($scope, $http, 'https://api.github.com/users/qbit/gists', 'gists');
 		}
 
 		function dataCtrl($scope, $http) {
+			$scope.processAttachment = function(att) {
+				console.log(att);
+			}
 			get($scope, $http, 'components/bolddaemon/categories.json', 'categories');
-			get($scope, $http, 'components/bolddaemon/posts.json', 'posts');
+			get($scope, $http, 'https://www.googleapis.com/plus/v1/people/108155057102084949527/activities/public?key=AIzaSyCb1HIajl9nArJU4EnLmfFqt2jIcK-K19E&callback=JSON_CALLBACK', 'posts');
 
 			$scope.setSearch = function(cat) {
 				$scope.search = cat.name;
@@ -109,11 +124,25 @@
 			</div>
 			</div>
 			<div class="span9" id="posts">
-				<div class="post" ng-repeat="post in posts | filter:search | limitTo:5">
+				<div class="post" ng-repeat="post in posts.items | filter:search | limitTo:10">
 					<hr>
-					<h3>{{post.title}}</h3>
-					<i>{{post.author}} - {{post.date}}</i>
-					<p ng-bind-html-unsafe="post.body">{{post.body}}</p>
+
+					<h3>{{post.published | date:'yyyy-MM-dd hh:mm:ss Z'}}</h3>
+
+					<i>{{post.actor.displayName}}</i>
+
+					<p ng-bind-html-unsafe="post.object.content">{{post.object.content}}</p>
+
+					<div class="attachments" ng-repeat="att in post.object.attachments | filter:search | limitTo:5">
+						<div>{{processAttachment(att)}}</div>
+						<!-- <div ng-if="att.objectType == 'article'"> -->
+						<!-- 	<a ng-href="{{att.url}}" ng-bind-html-unsafe="att.displayName">{{att.displayName}}</a> -->
+						<!-- 	<p ng-bind-html-unsafe="att.content">{{att.content}}</p> -->
+						<!-- 	<a ng-href="{{att.url}}"> -->
+						<!-- 		<img ng-src="{{att.image.url}}" -->
+						<!-- 	</a> -->
+						<!-- </div> -->
+					</div>
 				</div>
 			</div>
 		</div>

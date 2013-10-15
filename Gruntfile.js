@@ -10,12 +10,12 @@ module.exports = function(grunt) {
 				dest: "aaron@akb.io:/var/www/bolddaemon/test/",
 				syncDest: true,
 				recursive: true
-			},
-			"live": {
-				src: "./src/",
-				dest: "aaron@akb.io:/var/www/bolddaemon/",
-				syncDest: true,
-				recursive: true
+//},
+//"live": {
+//src: "./src/",
+//dest: "aaron@akb.io:/var/www/bolddaemon/",
+//syncDest: true,
+//recursive: true
 			}
 		}
 	});
