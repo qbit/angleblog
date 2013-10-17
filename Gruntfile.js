@@ -10,16 +10,17 @@ module.exports = function(grunt) {
 				dest: "aaron@akb.io:/var/www/bolddaemon/test/",
 				syncDest: true,
 				recursive: true
-//},
-//"live": {
-//src: "./src/",
-//dest: "aaron@akb.io:/var/www/bolddaemon/",
-//syncDest: true,
-//recursive: true
+			},
+			"live": {
+				src: "./src/",
+				dest: "aaron@akb.io:/var/www/bolddaemon/",
+				syncDest: true,
+				recursive: true
 			}
 		}
 	});
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-rsync');
-	grunt.registerTask('default', ['jshint', 'rsync']);
+	grunt.registerTask('test', ['jshint', 'rsync:test']);
+	grunt.registerTask('live', ['jshint', 'rsync:live']);
 };
